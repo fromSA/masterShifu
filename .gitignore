@@ -1,2 +1,6 @@
 
 .DS_Store
+.ipynb_checkpoints/INF399-checkpoint.ipynb
+.ipynb_checkpoints/INF399_experiment-checkpoint.ipynb
+DATA/
+fcm-0.9.6-cp27-none-win_amd64.whl
