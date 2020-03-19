@@ -1,13 +1,12 @@
 pkgs2load <- c('dplyr', 'magrittr', 'tidyr', 'flowCore', 'data.table', 'readr')
 sapply(pkgs2load, require, character.only = TRUE)
-install.packages("flowCore")
 set.seed(20191007)
 
 # directory and files
 # data from Flow Repository https://flowrepository.org/, experiment-ID FR-FCM-Z24N
 # data_dir <- "Z:/data/RA-HD data/Fcs_raw/"
-data_dir <- "DATA/"
-files <- list.files(data_dir, all.files = TRUE)
+data_dir <- "DATA/FlowRepository_FR-FCM-Z24N_files copy/UNSTIM/"
+files <- list.files(data_dir, pattern = ".fcs")
 
 # markers
 lineage_markers <- c("147Sm_CD20", "170Er_CD3", "145Nd_CD4",
@@ -28,7 +27,7 @@ extract_exprs <- function(ff, subsample = 20000){
 # read and prepare data for analysis
 dt <- rbindlist(lapply(files, function(file){
   dt_loc <- data.table(extract_exprs(read.FCS(paste0(data_dir, file))),
-                       subsample=20000)[, .SD, .SDcols = lineage_markers]
+                       subsample=20000)[, .SD,.SDcols = lineage_markers]
   dt_loc[, id:=file]
   dt_loc
 }))
